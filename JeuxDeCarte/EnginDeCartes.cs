@@ -6,8 +6,36 @@ using System.Threading.Tasks;
 
 namespace JeuxDeCarte
 {
+   
     public class EnginDeCartes
     {
+
+        // création de l'enum
+        public enum TypesCartes
+        {
+            Coeur = 0,
+            Carreau = 1,
+            Piques = 2,
+            Trefle = 3
+        }
+
+        // fonction qui retourne le texte de l'enum
+        public string RetourneCarteTexte(TypesCartes typeCarte)
+        {
+            switch (typeCarte)
+            {
+                case TypesCartes.Coeur: { return "coeur"; }
+                case TypesCartes.Carreau: { return "carreau"; }
+                case TypesCartes.Piques: { return "piques"; }
+                case TypesCartes.Trefle: { return "trèfle"; }
+                default: { return null; }
+            }
+        }
+
+
+
+
+
         // fonction qui créer un jeux de cartes
         public List<string> RetournerNouveauPaquet()
         {
@@ -17,18 +45,18 @@ namespace JeuxDeCarte
 
             List<string> typesCartes = new List<string>() { "coeur", "carreau", "piques", "trefle" };
 
-            for (int typeCarte = 0; typeCarte < 4; typeCarte++)
+            for (TypesCartes typeCarte = 0; typeCarte <= TypesCartes.Trefle; typeCarte++)
             {
-                Cartes.Add(string.Format("As de {0}", typesCartes[typeCarte]));
+                Cartes.Add(string.Format("As de {0}",RetourneCarteTexte(typeCarte)));
 
                 for (int i = 2; i < 11; i++)
                 {
-                    Cartes.Add(string.Format("{0} de {1}", i, typesCartes[typeCarte]));
+                    Cartes.Add(string.Format("{0} de {1}", i, RetourneCarteTexte(typeCarte)));
                 }
 
-                Cartes.Add(string.Format("Valet de {0}", typesCartes[typeCarte]));
-                Cartes.Add(string.Format("Dame de {0}", typesCartes[typeCarte]));
-                Cartes.Add(string.Format("Roi de {0}", typesCartes[typeCarte]));
+                Cartes.Add(string.Format("Valet de {0}", RetourneCarteTexte(typeCarte)));
+                Cartes.Add(string.Format("Dame de {0}", RetourneCarteTexte(typeCarte)));
+                Cartes.Add(string.Format("Roi de {0}", RetourneCarteTexte(typeCarte)));
             }
             // on retourne les cartes
             return Cartes;
