@@ -12,52 +12,43 @@ namespace JeuxDeCarte
         {
 
             // création du jeux de cartes
-            string[] Cartes = new string[52];
+            // list dynamique
+            List<string> Cartes = new List<string>();
 
-            string[] typesCartes = new string[4] { "coeur", "carreau", "piques", "trefle" };
+            List<string> typesCartes = new List<string>() { "coeur", "carreau", "piques", "trefle" };
 
-            int index = 0;
             for (int typeCarte = 0; typeCarte < 4; typeCarte++)
             {
-                Cartes[index] = string.Format("As de {0}", typesCartes[typeCarte]);
-                index++;
+                Cartes.Add(string.Format("As de {0}", typesCartes[typeCarte]));
 
                 for (int i = 2; i < 11; i++)
                 {
-                    Cartes[index] = string.Format("{0} de {1}", i, typesCartes[typeCarte]);
-                    index++;
+                    Cartes.Add(string.Format("{0} de {1}", i, typesCartes[typeCarte]));
                 }
 
-                Cartes[index] = string.Format("Valet de {0}", typesCartes[typeCarte]);
-                index++;
-                Cartes[index] = string.Format("Dame de {0}", typesCartes[typeCarte]);
-                index++;
-                Cartes[index] = string.Format("Roi de {0}", typesCartes[typeCarte]);
-                index++;
+                Cartes.Add(string.Format("Valet de {0}", typesCartes[typeCarte]));
+                Cartes.Add(string.Format("Dame de {0}", typesCartes[typeCarte]));
+                Cartes.Add(string.Format("Roi de {0}", typesCartes[typeCarte]));
             }
 
 
             // création du jeux de cartes brassées
+            // List dynamique
 
-            string[] CartesBrassees = new string[52];
+            List<string> CartesBrassees = new List<string>();
+            // on créer un nombre aléatoire
             Random rnd = new Random();
 
-            for (int i = 0; i < 52; i++)
+            // tant que CarteBrassees est inférieur à 52
+            while (CartesBrassees.Count < 52)
             {
-                bool cartePlacee = false;
-                while (!cartePlacee)
+                int i = rnd.Next(0, 52); // on obtient un chiffre entre 0 et 52
+                // si CarteBrassees ne contient pas la carte sélectionnée, on l'ajoute au paquet de CarteBrassees
+                if (!CartesBrassees.Contains(Cartes[i]))
                 {
-                    int j = rnd.Next(0, 52);
-                    if (CartesBrassees[j] == null)
-                    {
-                        CartesBrassees[j] = Cartes[i];
-                        cartePlacee = true;
-                    }
-
-                 }
-             }
-
-
+                    CartesBrassees.Add(Cartes[i]);
+                }
+            }
 
             for (int i = 0; i < 52; i++)
             {
