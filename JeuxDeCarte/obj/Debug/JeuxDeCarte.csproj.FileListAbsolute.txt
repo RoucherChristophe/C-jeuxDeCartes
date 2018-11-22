@@ -1,0 +1,6 @@
+c:\users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\bin\Debug\JeuxDeCarte.exe.config
+c:\Users\christophe\Documents\Visual Studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\bin\Debug\JeuxDeCarte.exe
+c:\Users\christophe\Documents\Visual Studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\bin\Debug\JeuxDeCarte.pdb
+c:\Users\christophe\Documents\Visual Studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\obj\Debug\JeuxDeCarte.csprojResolveAssemblyReference.cache
+c:\Users\christophe\Documents\Visual Studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\obj\Debug\JeuxDeCarte.exe
+c:\Users\christophe\Documents\Visual Studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\obj\Debug\JeuxDeCarte.pdb
