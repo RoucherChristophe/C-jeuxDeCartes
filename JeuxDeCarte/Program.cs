@@ -19,18 +19,16 @@ namespace JeuxDeCarte
             // création du jeux de cartes brassées
             // CarteBrassees reçoit une liste demandé à l'engin BrassCarte avec en parametre un nouveau paquet de carte
 
-           // List<string> CartesBrassees = engin.BrassCarte(Cartes);
-           
-            Carte carte = new Carte();
+            List<Carte> CartesBrassees = engin.BrassCarte(Cartes);
 
             for (int i = 0; i < 52; i++)
             {
-                Console.WriteLine(string.Format("Valeur: {0}", Cartes[i].Valeur));
-                Console.WriteLine(string.Format("Type: {0}", carte.RetourneCarteTexte(Cartes[i].TypeCarte)));
-                Console.WriteLine(string.Format("Nom: {0}", Cartes[i].Nom));
+                Console.WriteLine(string.Format("Valeur: {0}", CartesBrassees[i].Valeur));
+                Console.WriteLine(string.Format("Type: {0}", CartesBrassees[i].RetourneCarteTexte(CartesBrassees[i].TypeCarte)));
+                Console.WriteLine(string.Format("Nom: {0}", CartesBrassees[i].Nom));
                 Console.ReadLine();
             }
 
-            }
-        }
-    }
+         }
+     }
+}

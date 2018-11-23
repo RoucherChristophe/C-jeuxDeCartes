@@ -9,14 +9,10 @@ namespace JeuxDeCarte
    
     public class EnginDeCartes
     {
-
-        // création de l'enum
-        public enum TypesCartes
+        // fonction privée qui permet de créer une carte
+        private Carte CreerCarte(Carte.TypesCartes typeCarte, int valeur)
         {
-            Coeur = 0,
-            Carreau = 1,
-            Piques = 2,
-            Trefle = 3
+            return new Carte() { TypeCarte = typeCarte, Valeur = valeur };
         }
 
         // fonction qui créer un jeux de cartes
@@ -26,49 +22,23 @@ namespace JeuxDeCarte
             // list dynamique
             List<Carte> Cartes = new List<Carte>();
 
-            for (TypesCartes typeCarte = 0; typeCarte <= TypesCartes.Trefle; typeCarte++)
+            for (Carte.TypesCartes typeCarte = 0; typeCarte <= Carte.TypesCartes.Trefle; typeCarte++)
             {
-                // création de l'AS
-                Carte carte = new Carte();
-                carte.TypeCarte = typeCarte; //on passe le type de carte en cour (le nom)
-                carte.Valeur = 1;
-                Cartes.Add(carte);
-
-                // création des cartes de 2 à 10
-                for (int i = 2; i < 11; i++)
+                // création des cartes 
+                for (int i = 1; i < 14; i++)
                 {
-                    carte = new Carte(); //on réassigne la carte
-                    carte.TypeCarte = typeCarte; //on passe le type de carte en cour (le nom)
-                    carte.Valeur = i;
-                    Cartes.Add(carte);
-                }
-
-                // création des valets
-                carte = new Carte(); //on réassigne la carte
-                carte.TypeCarte = typeCarte; //on passe le type de carte en cour (le nom)
-                carte.Valeur = 11;
-                Cartes.Add(carte);
-                // création des dames
-                carte = new Carte(); //on réassigne la carte
-                carte.TypeCarte = typeCarte;//on passe le type de carte en cour (le nom)
-                carte.Valeur = 12;
-                Cartes.Add(carte);
-                // création des rois
-                carte = new Carte(); //on réassigne la carte
-                carte.TypeCarte = typeCarte; //on passe le type de carte en cour (le nom)
-                carte.Valeur = 13;
-                Cartes.Add(carte);
+                    Cartes.Add(CreerCarte(typeCarte, i));
+                }             
             }
             // on retourne les cartes
             return Cartes;
         }
 
-
         // on créer une fonction pour brasséer les cartes
         // c'est une liste de type string qui reçoit en parametre une list string que l'on appelle Cartes
-        public List<string> BrassCarte(List<string> Cartes)
+        public List<Carte> BrassCarte(List<Carte> Cartes)
         {
-            List<string> CartesBrassees = new List<string>();
+            List<Carte> CartesBrassees = new List<Carte>();
             // on créer un nombre aléatoire
             Random rnd = new Random();
 
@@ -85,8 +55,6 @@ namespace JeuxDeCarte
 
             return CartesBrassees;
         }
-
-
 
 
     }

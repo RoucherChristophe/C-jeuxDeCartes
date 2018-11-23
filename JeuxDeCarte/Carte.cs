@@ -9,8 +9,8 @@ namespace JeuxDeCarte
     // création de la Classe Carte pour pouvoir récupérer les caractéristiques des cartes
     public class Carte
     {
-        // propriétés des cartes
 
+        // propriétés des cartes
         public string Nom
         {
             get 
@@ -50,22 +50,31 @@ namespace JeuxDeCarte
         }
         
         // propriété qui donne le nom de façon générique
-        private EnginDeCartes.TypesCartes _typeCarte;
-        public EnginDeCartes.TypesCartes TypeCarte
+        private TypesCartes _typeCarte;
+        public TypesCartes TypeCarte
         {
             get { return _typeCarte; }
             set { _typeCarte = value; }
         }
 
+        // création de l'enum
+        public enum TypesCartes
+        {
+            Coeur = 0,
+            Carreau = 1,
+            Piques = 2,
+            Trefle = 3
+        }
+
         // fonction qui retourne le texte de l'enum
-        public string RetourneCarteTexte(EnginDeCartes.TypesCartes typeCarte)
+        public string RetourneCarteTexte(TypesCartes typeCarte)
         {
             switch (typeCarte)
             {
-                case EnginDeCartes.TypesCartes.Coeur: { return "coeur"; }
-                case EnginDeCartes.TypesCartes.Carreau: { return "carreau"; }
-                case EnginDeCartes.TypesCartes.Piques: { return "piques"; }
-                case EnginDeCartes.TypesCartes.Trefle: { return "trèfle"; }
+                case TypesCartes.Coeur: { return "coeur"; }
+                case TypesCartes.Carreau: { return "carreau"; }
+                case TypesCartes.Piques: { return "piques"; }
+                case TypesCartes.Trefle: { return "trèfle"; }
                 default: { return null; }
             }
         }
