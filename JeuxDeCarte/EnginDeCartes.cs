@@ -33,30 +33,45 @@ namespace JeuxDeCarte
         }
 
 
-
-
-
         // fonction qui créer un jeux de cartes
-        public List<string> RetournerNouveauPaquet()
+        public List<Carte> RetournerNouveauPaquet()
         {
             // création du jeux de cartes
             // list dynamique
-            List<string> Cartes = new List<string>();
-
-            List<string> typesCartes = new List<string>() { "coeur", "carreau", "piques", "trefle" };
+            List<Carte> Cartes = new List<Carte>();
 
             for (TypesCartes typeCarte = 0; typeCarte <= TypesCartes.Trefle; typeCarte++)
             {
-                Cartes.Add(string.Format("As de {0}",RetourneCarteTexte(typeCarte)));
+                // création de l'AS
+                Carte carte = new Carte();
+                carte.Nom = string.Format("As de {0}",RetourneCarteTexte(typeCarte));
+                carte.Valeur = 1;
+                Cartes.Add(carte);
 
+                // création des cartes de 2 à 10
                 for (int i = 2; i < 11; i++)
                 {
-                    Cartes.Add(string.Format("{0} de {1}", i, RetourneCarteTexte(typeCarte)));
+                    carte = new Carte(); //on réassigne la carte
+                    carte.Nom = string.Format("{0} de {1}", i, RetourneCarteTexte(typeCarte));
+                    carte.Valeur = i;
+                    Cartes.Add(carte);
                 }
 
-                Cartes.Add(string.Format("Valet de {0}", RetourneCarteTexte(typeCarte)));
-                Cartes.Add(string.Format("Dame de {0}", RetourneCarteTexte(typeCarte)));
-                Cartes.Add(string.Format("Roi de {0}", RetourneCarteTexte(typeCarte)));
+                // création des valets
+                carte = new Carte(); //on réassigne la carte
+                carte.Nom = string.Format("Valet de {0}", RetourneCarteTexte(typeCarte));
+                carte.Valeur = 11;
+                Cartes.Add(carte);
+                // création des dames
+                carte = new Carte(); //on réassigne la carte
+                carte.Nom = string.Format("Dame de {0}", RetourneCarteTexte(typeCarte));
+                carte.Valeur = 12;
+                Cartes.Add(carte);
+                // création des rois
+                carte = new Carte(); //on réassigne la carte
+                carte.Nom = string.Format("Roi de {0}", RetourneCarteTexte(typeCarte));
+                carte.Valeur = 13;
+                Cartes.Add(carte);
             }
             // on retourne les cartes
             return Cartes;
