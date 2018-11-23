@@ -21,10 +21,13 @@ namespace JeuxDeCarte
 
            // List<string> CartesBrassees = engin.BrassCarte(Cartes);
            
+            Carte carte = new Carte();
 
             for (int i = 0; i < 52; i++)
             {
-                Console.WriteLine(string.Format("Nom de la carte: {0} - Valeur: {1}", Cartes[i].Nom, Cartes[i].Valeur));
+                Console.WriteLine(string.Format("Valeur: {0}", Cartes[i].Valeur));
+                Console.WriteLine(string.Format("Type: {0}", carte.RetourneCarteTexte(Cartes[i].TypeCarte)));
+                Console.WriteLine(string.Format("Nom: {0}", Cartes[i].Nom));
                 Console.ReadLine();
             }
 

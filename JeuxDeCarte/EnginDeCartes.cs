@@ -19,20 +19,6 @@ namespace JeuxDeCarte
             Trefle = 3
         }
 
-        // fonction qui retourne le texte de l'enum
-        public string RetourneCarteTexte(TypesCartes typeCarte)
-        {
-            switch (typeCarte)
-            {
-                case TypesCartes.Coeur: { return "coeur"; }
-                case TypesCartes.Carreau: { return "carreau"; }
-                case TypesCartes.Piques: { return "piques"; }
-                case TypesCartes.Trefle: { return "trèfle"; }
-                default: { return null; }
-            }
-        }
-
-
         // fonction qui créer un jeux de cartes
         public List<Carte> RetournerNouveauPaquet()
         {
@@ -44,7 +30,7 @@ namespace JeuxDeCarte
             {
                 // création de l'AS
                 Carte carte = new Carte();
-                carte.Nom = string.Format("As de {0}",RetourneCarteTexte(typeCarte));
+                carte.TypeCarte = typeCarte; //on passe le type de carte en cour (le nom)
                 carte.Valeur = 1;
                 Cartes.Add(carte);
 
@@ -52,24 +38,24 @@ namespace JeuxDeCarte
                 for (int i = 2; i < 11; i++)
                 {
                     carte = new Carte(); //on réassigne la carte
-                    carte.Nom = string.Format("{0} de {1}", i, RetourneCarteTexte(typeCarte));
+                    carte.TypeCarte = typeCarte; //on passe le type de carte en cour (le nom)
                     carte.Valeur = i;
                     Cartes.Add(carte);
                 }
 
                 // création des valets
                 carte = new Carte(); //on réassigne la carte
-                carte.Nom = string.Format("Valet de {0}", RetourneCarteTexte(typeCarte));
+                carte.TypeCarte = typeCarte; //on passe le type de carte en cour (le nom)
                 carte.Valeur = 11;
                 Cartes.Add(carte);
                 // création des dames
                 carte = new Carte(); //on réassigne la carte
-                carte.Nom = string.Format("Dame de {0}", RetourneCarteTexte(typeCarte));
+                carte.TypeCarte = typeCarte;//on passe le type de carte en cour (le nom)
                 carte.Valeur = 12;
                 Cartes.Add(carte);
                 // création des rois
                 carte = new Carte(); //on réassigne la carte
-                carte.Nom = string.Format("Roi de {0}", RetourneCarteTexte(typeCarte));
+                carte.TypeCarte = typeCarte; //on passe le type de carte en cour (le nom)
                 carte.Valeur = 13;
                 Cartes.Add(carte);
             }
