@@ -1,0 +1,26 @@
+Jeux de Cartes : Bataille
+
+Vidéo 14: transformer le projet existant en bibliothèque de classe
+
+dans la racine du projet -> bin -> Debug, il y a un exécutable,
+ 
+on va faire de cette partie du projet une bibliothèque de classe,
+la bibliothèque de classe va permettre d'appeller le jeu grace à un exécutable,
+cette partie ne doit rester en mode exécutable.
+
+On renomme la classe "JeuxDeCartes" (clic droit dessus ->renommer) en "BiblioCartes"
+On va dans les propriétés (clic droit sur la classe BiblioCartes -> propriétés ,tout en bas) modifier le Nom de l'assembly en "BiblioCartes" et l'Espace de nom par defaut en "BiblioCartes"
+Changer les namespaces des classes Carte, EnginDeCartes et Program en"BiblioCartes"
+
+Forcer une régénération, clic droit sur BiblioCartes -> Régénérer, dans la racine du projet -> bin -> Debug, un fichier "BiblioCartes.dll" à été créé.
+
+Créer un nouveau projet: clic droit sur "Solution JeuxDeCartes" -> Ajouter -> nouveau projet -> Application Console -> nommer "Bataille" -> OK
+Couper tous le code de "Program" de "BiblioCartes" et le coller dans "Program" de "Bataille" 
+Ajouter "BiblioCartes" en référence, dans la classe "Bataille" -> Référence -> clic droit -> Ajouter une référence ->Solution -> Projet -> cocher "BiblioCartes" -> OK
+Ajouter le "using BiblioCartes", dans "Program" de "Bataille" ajouter "using BiblioCartes;" aux autres "using".
+
+"BiblioCartes" est en gras ce qui veux dire que c'est lui le programme de démmarage, on doit le chager vers "Bataille"
+Clic droit sur "Bataille" -> Définir comme projet de démmarage, "Bataille" est en gras
+Supprimer "Program" de "BiblioCartes" clic droit dessus -> Supprimer -> OK
+
+Clic droit sur "Solution JeuxDeCartes" -> "Régénérer la Solution", pour voir si il n'y a pas d'erreur

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JeuxDeCarte
+namespace BiblioCartes
 {
     // création de la Classe Carte pour pouvoir récupérer les caractéristiques des cartes
     public class Carte

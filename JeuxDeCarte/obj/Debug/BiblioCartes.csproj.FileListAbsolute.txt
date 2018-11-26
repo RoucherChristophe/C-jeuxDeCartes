@@ -1,0 +1,6 @@
+C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\bin\Debug\BiblioCartes.dll.config
+C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\bin\Debug\BiblioCartes.dll
+C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\bin\Debug\BiblioCartes.pdb
+C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\obj\Debug\BiblioCartes.dll
+C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\obj\Debug\BiblioCartes.pdb
+C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\JeuxDeCarte\obj\Debug\BiblioCartes.csprojResolveAssemblyReference.cache

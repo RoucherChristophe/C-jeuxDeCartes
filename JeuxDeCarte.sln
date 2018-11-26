@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeuxDeCarte", "JeuxDeCarte\JeuxDeCarte.csproj", "{FE408835-B763-419A-BC86-C9683E53B264}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiblioCartes", "JeuxDeCarte\BiblioCartes.csproj", "{FE408835-B763-419A-BC86-C9683E53B264}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bataille", "Bataille\Bataille.csproj", "{863FD5AE-CD55-44CC-9D12-5CB3FAE9988D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{FE408835-B763-419A-BC86-C9683E53B264}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE408835-B763-419A-BC86-C9683E53B264}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE408835-B763-419A-BC86-C9683E53B264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{863FD5AE-CD55-44CC-9D12-5CB3FAE9988D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{863FD5AE-CD55-44CC-9D12-5CB3FAE9988D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{863FD5AE-CD55-44CC-9D12-5CB3FAE9988D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{863FD5AE-CD55-44CC-9D12-5CB3FAE9988D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
