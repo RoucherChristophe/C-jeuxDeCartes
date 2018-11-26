@@ -9,55 +9,52 @@ namespace Bataille
 {
 	class Program
 	{
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
-			//on creer l'instance d'EnginDeCartes
+			//on créer l'instance d'EnginDeCartes
 			EnginDeCartes engin = new EnginDeCartes();
 
-            // variale temporaire de list de list de cartes
-            List<List<Carte>> deuxPaquets = engin.RetourneDeuxPaquets();
+			// variale temporaire de list de list de cartes
+			List<List<Carte>> deuxPaquets = engin.RetourneDeuxPaquets();
 
 			// récupération de chaque paquet de cartes, pour le joueur et l'ordinateur
-            List<Carte> cartesJoueur = deuxPaquets[0];
-            List<Carte> cartesOrdi = deuxPaquets[1];	
-
-			// variables pour les points des joueurs
-			int pointsJoueur = 0;
-			int pointsOrdi = 0;
+			List<Carte> cartesJoueur = deuxPaquets[0];
+			List<Carte> cartesOrdi = deuxPaquets[1];	
 
 			// création de 2 colonnes Joueur et ordi 
 			int posHor = 0;
-			for (int i = 0; i < 26; i++)
+			
+			// tant que les joueurs ont des cartes on boucle
+			while (cartesJoueur.Count > 0 && cartesOrdi.Count > 0)
 			{
-				// Affichage noms des joueurs 
-				Console.SetCursorPosition(0, posHor);
-				Console.WriteLine(string.Format("Joueur ({0})", pointsJoueur));
 
-				Console.SetCursorPosition(20, posHor);
-				Console.WriteLine(string.Format("Ordi ({0})", pointsOrdi));
-				posHor++;
-
-				// Affichage des cartes des joueurs
-				Console.SetCursorPosition(0, posHor);
-				Console.WriteLine(cartesJoueur[i].Nom);
-				Console.SetCursorPosition(20, posHor);
-				Console.WriteLine(cartesOrdi[i].Nom);
-				posHor++;
+				AfficheNomsJoueursEtCartes(posHor, cartesJoueur, cartesOrdi);				
+				
+                // saut de ligne 
+				//posHor++;
 
 				// Affichage gagnant
-				if (cartesJoueur[i].Valeur == cartesOrdi[i].Valeur)
+				// si il y a bataille
+				if (cartesJoueur[0].Valeur == cartesOrdi[0].Valeur)
 				{
-					Console.WriteLine("Egalité!"); 
+					Console.WriteLine("Egalité! le joueur gagne pour l'instant");
+					cartesJoueur.Add(cartesOrdi[0]);
+					cartesOrdi.RemoveAt(0);
+
 				}
-				else if (cartesJoueur[i].Valeur > cartesOrdi[i].Valeur)
+				// si le joueur gagne
+				else if (cartesJoueur[0].Valeur > cartesOrdi[0].Valeur)
 				{
 					Console.WriteLine("Joueur gagne!");
-					pointsJoueur++;
+					cartesJoueur.Add(cartesOrdi[0]);
+					cartesOrdi.RemoveAt(0);
 				}
+				// si l'Ordi gagne
 				else
 				{
 					Console.WriteLine("Ordi gagne!");
-					pointsOrdi++;
+					cartesOrdi.Add(cartesJoueur[0]);
+					cartesJoueur.RemoveAt(0);
 				}
 				posHor++;
 				posHor++;
@@ -66,21 +63,35 @@ namespace Bataille
 			}
 
 			// Affichage final du gagnant
-			if (pointsOrdi == pointsJoueur)
+		 if (cartesOrdi.Count == 0)
 			{
-				Console.WriteLine("Egalité !");
-			}
-			else if (pointsJoueur > pointsOrdi)
-			{
-				Console.WriteLine("Le Joueur a gagné ! {0} points à {1} points", pointsJoueur, pointsOrdi);
+				Console.WriteLine("Le Joueur a gagné !");
 			}
 			else
 	{
-		Console.WriteLine("L'Ordinateur a gagné ! {0} points à {1} points", pointsOrdi, pointsJoueur);
+		Console.WriteLine("L'Ordinateur a gagné !");
 	}
 			Console.ReadLine();
 
 		 
+		}
+
+		private static void AfficheNomsJoueursEtCartes(int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi )
+		{
+			// Affichage noms des joueurs 
+			Console.SetCursorPosition(0, posHor);
+			Console.WriteLine(string.Format("Joueur ({0})", cartesJoueur.Count));
+
+			Console.SetCursorPosition(20, posHor);
+			Console.WriteLine(string.Format("Ordi ({0})", cartesOrdi.Count));
+			posHor++;
+
+			// Affichage des cartes des joueurs, la 1ere du paquet
+			Console.SetCursorPosition(0, posHor);
+			Console.WriteLine(cartesJoueur[0].Nom);
+			Console.SetCursorPosition(20, posHor);
+			Console.WriteLine(cartesOrdi[0].Nom);
+			posHor++;
 		}
 	}
 }
