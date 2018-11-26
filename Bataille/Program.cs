@@ -14,36 +14,18 @@ namespace Bataille
 			//on creer l'instance d'EnginDeCartes
 			EnginDeCartes engin = new EnginDeCartes();
 
-			// Cartes reçoit le nouveau paquet de cartes
-			List<Carte> Cartes = engin.RetournerNouveauPaquet();
+            // variale temporaire de list de list de cartes
+            List<List<Carte>> deuxPaquets = engin.RetourneDeuxPaquets();
 
-			// création du jeux de cartes brassées
-			// CarteBrassees reçoit une liste demandé à l'engin BrassCarte avec en parametre un nouveau paquet de carte
-			List<Carte> CartesBrassees = engin.BrassCarte(Cartes);
-
-
-			// création de listes de cartes pour le joueur et l'ordinateur
-			List<Carte> cartesJoueur = new List<Carte>();
-			List<Carte> cartesOrdi = new List<Carte>();
-
-			// création de 2 boucles pour distribuer le jeux de cartes brassées
-			for (int i = 0; i < 26; i++)
-			{
-				cartesJoueur.Add(CartesBrassees[i]);
-			}
-
-			for (int i = 26; i < 52; i++)
-			{
-				cartesOrdi.Add(CartesBrassees[i]);
-			}
-
+			// récupération de chaque paquet de cartes, pour le joueur et l'ordinateur
+            List<Carte> cartesJoueur = deuxPaquets[0];
+            List<Carte> cartesOrdi = deuxPaquets[1];	
 
 			// variables pour les points des joueurs
 			int pointsJoueur = 0;
 			int pointsOrdi = 0;
 
 			// création de 2 colonnes Joueur et ordi 
-
 			int posHor = 0;
 			for (int i = 0; i < 26; i++)
 			{

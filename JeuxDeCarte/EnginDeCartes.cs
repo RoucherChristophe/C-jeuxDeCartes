@@ -9,6 +9,37 @@ namespace BiblioCartes
    
     public class EnginDeCartes
     {
+
+        // fonction qui retourne 2 paquets (2 List) de cartes à partir d'1 paquet de carte créé
+        public List<List<Carte>> RetourneDeuxPaquets()
+        {
+            // on créer une list qui contient une list de cartes temporaires
+            List<List<Carte>> deuxPaquets = new List<List<Carte>>();
+
+            // on récupère un nouveau paqiuet de cartes que l'on brasse
+            List<Carte> paquetBrasse = BrassCarte(RetournerNouveauPaquet());
+
+            // création des 2 paquets de cartes
+            List<Carte> paquet1 = new List<Carte>();
+            List<Carte> paquet2 = new List<Carte>();
+
+            // création de 2 boucles pour distribuer le jeux de cartes brassées
+            for (int i = 0; i < 26; i++)
+            {
+                paquet1.Add(paquetBrasse[i]);
+            }
+            deuxPaquets.Add(paquet1);
+
+            for (int i = 26; i < 52; i++)
+            {
+                paquet2.Add(paquetBrasse[i]);
+            }
+            deuxPaquets.Add(paquet2);
+
+            // on retourne les 2 paquets
+            return deuxPaquets;
+        }
+
         // fonction privée qui permet de créer une carte
         private Carte CreerCarte(Carte.TypesCartes typeCarte, int valeur)
         {
