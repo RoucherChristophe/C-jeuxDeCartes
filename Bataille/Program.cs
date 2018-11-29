@@ -7,76 +7,78 @@ using BiblioCartes;
 
 namespace Bataille
 {
-	class Program
-	{
-		private static void Main(string[] args)
-		{
-			//on créer l'instance d'EnginDeCartes
-			EnginDeCartes engin = new EnginDeCartes();
+    class Program
+    {
+        private static void Main(string[] args)
+        {
+            Console.BufferHeight = 1000;
+            //on créer l'instance d'EnginDeCartes
+            EnginDeCartes engin = new EnginDeCartes();
 
-			// variale temporaire de list de list de cartes
-			List<List<Carte>> deuxPaquets = engin.RetourneDeuxPaquets();
+            // variale temporaire de list de list de cartes
+            List<List<Carte>> deuxPaquets = engin.RetourneDeuxPaquets();
 
-			// récupération de chaque paquet de cartes, pour le joueur et l'ordinateur
-			List<Carte> cartesJoueur = deuxPaquets[0];
-			List<Carte> cartesOrdi = deuxPaquets[1];	
+            // récupération de chaque paquet de cartes, pour le joueur et l'ordinateur
+            List<Carte> cartesJoueur = deuxPaquets[0];
+            List<Carte> cartesOrdi = deuxPaquets[1];	
 
-			// création de 2 colonnes Joueur et ordi 
-			int posHor = 0;
-			
-			// tant que les joueurs ont des cartes on boucle
-			while (cartesJoueur.Count > 0 && cartesOrdi.Count > 0)
-			{
-
-				AfficheNomsJoueursEtCartes(posHor, cartesJoueur, cartesOrdi);								
+            // création de 2 colonnes Joueur et ordi 
+            int posHor = 0;
+            
+            // tant que les joueurs ont des cartes on boucle
+            while (cartesJoueur.Count > 0 && cartesOrdi.Count > 0)
+            {
+                // les valeurs de posHor doivent être passées par référence, et non par valeur
+                // il faut mettre 'ref' devant tous les 'posHor', que ce soit l'appelant ou l'appelé
+                AfficheNomsJoueursEtCartes(ref posHor, cartesJoueur, cartesOrdi);								
                 // saut de ligne pour chaque colonne
-				posHor+=2;
+                posHor++;
 
-                AfficheGagnant(posHor, cartesJoueur, cartesOrdi);
-				posHor+=2;
+                AfficheGagnant(ref posHor, cartesJoueur, cartesOrdi);
+                posHor++;
 
-				Console.ReadLine();
-			}
+                Console.ReadLine();
+            }
 
-			// Affichage final du gagnant
-		 if (cartesOrdi.Count == 0)
-			{
-				Console.WriteLine("Le Joueur a gagné !");
-			}
-			else
-	{
-		Console.WriteLine("L'Ordinateur a gagné !");
-	}
-			Console.ReadLine();
+            // Affichage final du gagnant
+         if (cartesOrdi.Count == 0)
+            {
+                Console.WriteLine("Le Joueur a gagné !");
+            }
+            else
+    {
+        Console.WriteLine("L'Ordinateur a gagné !");
+    }
+            Console.ReadLine();
 
-		 
-		}
+         
+        }
 
-		private static void AfficheNomsJoueursEtCartes(int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi )
-		{
-			// Affichage noms des joueurs 
-			Console.SetCursorPosition(0, posHor);
-			Console.WriteLine(string.Format("Joueur ({0})", cartesJoueur.Count));
+        private static void AfficheNomsJoueursEtCartes(ref int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi )
+        {
+            // Affichage noms des joueurs 
+            Console.SetCursorPosition(0, posHor);
+            Console.WriteLine(string.Format("Joueur ({0})", cartesJoueur.Count));
 
-			Console.SetCursorPosition(20, posHor);
-			Console.WriteLine(string.Format("Ordi ({0})", cartesOrdi.Count));
-			posHor++;
+            Console.SetCursorPosition(20, posHor);
+            Console.WriteLine(string.Format("Ordi ({0})", cartesOrdi.Count));
+            posHor++;
 
-			// Affichage des cartes des joueurs, la 1ere du paquet
-			Console.SetCursorPosition(0, posHor);
-			Console.WriteLine(cartesJoueur[0].Nom);
-			Console.SetCursorPosition(20, posHor);
-			Console.WriteLine(cartesOrdi[0].Nom);
-			posHor++;
-		}
+            // Affichage des cartes des joueurs, la 1ere du paquet
+            Console.SetCursorPosition(0, posHor);
+            Console.WriteLine(cartesJoueur[0].Nom);
+            Console.SetCursorPosition(20, posHor);
+            Console.WriteLine(cartesOrdi[0].Nom);
+            posHor++;
+        }
 
-        private static void AfficheGagnant(int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi)
+        private static void AfficheGagnant(ref int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi)
         {
             // Affichage gagnant
             // si il y a bataille
             if (cartesJoueur[0].Valeur == cartesOrdi[0].Valeur)
             {
-                Bataille(posHor,  cartesJoueur, cartesOrdi);
+                Bataille(ref posHor,  cartesJoueur, cartesOrdi);
             }
             // si le joueur gagne
             else if (cartesJoueur[0].Valeur > cartesOrdi[0].Valeur)
@@ -100,11 +102,12 @@ namespace Bataille
 
 
         // fonction pour gérer la bataille, le 1er qui sort la même carte que la bataille gagne les 2 paquets de bataille
-        private static void Bataille(int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi)
+        private static void Bataille(ref int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi)
         {
             //on récupère la valeur de la carte en bataille
             int valeurCarteBataille = cartesJoueur[0].Valeur; 
             // on créer 2 nouveaux paquets pour la bataille
+            
             List<Carte> cartesBatailleJoueur = new List<Carte>();
             List<Carte> cartesBatailleOrdi = new List<Carte>();
 
@@ -120,7 +123,7 @@ namespace Bataille
             Console.SetCursorPosition(0, posHor);
             // on informe le jioueur qu'il est en bataille
             Console.WriteLine("B A T A I L L E ! ! !");
-            posHor += 2;
+            posHor ++;
             Console.ReadLine();
 
             while (true)
@@ -130,29 +133,63 @@ namespace Bataille
                 cartesBatailleOrdi.Insert(0, cartesOrdi[0]);
                 cartesOrdi.RemoveAt(0);
 
-                AfficheNomsJoueursEtCartes(posHor, cartesBatailleJoueur, cartesBatailleOrdi);
+                AfficheNomsJoueursEtCartes(ref posHor, cartesBatailleJoueur, cartesBatailleOrdi);
 
-                posHor += 3;
+                posHor += 2;
 
                 // le 1er joueur qui sort la même carte que la bataille gagne
                 if (cartesBatailleJoueur[0].Valeur == valeurCarteBataille)
                 {
-                    Console.WriteLine("Le joueur a gagné la bataille");
+                    GagneBataille(ref posHor, cartesJoueur, cartesOrdi, cartesBatailleJoueur, cartesBatailleOrdi, true);
                     break;
                 }
                 else if (cartesBatailleOrdi[0].Valeur == valeurCarteBataille)
                 {
-                    Console.WriteLine("L'Ordi a gagné la bataille");
+                    GagneBataille(ref posHor, cartesJoueur, cartesOrdi, cartesBatailleJoueur, cartesBatailleOrdi, false);
                     break;
                 }
-
+                Console.ReadLine();
             }
-
-
-
-
 
         }
 
-	}
+        private static void GagneBataille(ref int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi,
+                                          List<Carte> carteBatailleJoueur, List<Carte> carteBatailleOrdi, bool joueurGagnant)
+        {
+            Console.SetCursorPosition(0, posHor);
+            if (joueurGagnant)
+            {
+                Console.WriteLine("Le joueur a gagné la bataille");
+                // on prend toutes les cartes du paquet bataille du joueur pour lui redonner 
+                while (carteBatailleJoueur.Count > 0)
+                {
+                    cartesJoueur.Add(carteBatailleJoueur[0]);
+                    carteBatailleJoueur.RemoveAt(0);
+                }
+                // on prend toutes les cartes du paquet bataille de l'ordi pour le donner au joueur
+                while (carteBatailleOrdi.Count > 0)
+                {
+                    cartesJoueur.Add(carteBatailleOrdi[0]);
+                    carteBatailleOrdi.RemoveAt(0);
+                }
+            }
+            else
+            {
+                Console.WriteLine("L'Ordi a gagné la bataille");
+                // on prend toutes les cartes du paquet bataille de l'ordi pour lui redonner 
+                while (carteBatailleJoueur.Count > 0)
+                {                 
+                    cartesOrdi.Add(carteBatailleJoueur[0]);
+                    carteBatailleJoueur.RemoveAt(0);
+                }
+                // on prend toutes les cartes du paquet bataille du joueur pour le donner a l'ordi
+                while (carteBatailleOrdi.Count > 0)
+                {
+                    cartesOrdi.Add(carteBatailleOrdi[0]);
+                    carteBatailleOrdi.RemoveAt(0);
+                }
+            }
+        }
+
+    }
 }
