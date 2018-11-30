@@ -30,12 +30,20 @@ namespace Bataille
 				jeuBataille.JouerUnTour();
 				Console.Clear();
 				Console.SetCursorPosition(0, 0);
-				Console.WriteLine("Joueur");
-				Console.SetCursorPosition(20, 0);
-				Console.WriteLine("Ordinateur");
+				Console.WriteLine("Etat du jeu: {0}", jeuBataille.EtatJeu.ToString());
 				Console.SetCursorPosition(0, 1);
+				Console.WriteLine("Gagnant dernier tour: {0}", jeuBataille.GagnantDernierTour.ToString());
+                Console.SetCursorPosition(0, 2);
+                Console.WriteLine("Nombre cartes joueur: {0}", jeuBataille.NombreCartesJoueur);
+                Console.SetCursorPosition(30, 2);
+                Console.WriteLine("Nombre cartes ordinateur: {0}", jeuBataille.NombreCartesOrdi);
+				Console.SetCursorPosition(0, 4);
+				Console.WriteLine("Joueur");
+				Console.SetCursorPosition(20, 4);
+				Console.WriteLine("Ordinateur");
+				Console.SetCursorPosition(0, 5);
 				Console.WriteLine(jeuBataille.CarteEnCourJoueur.Nom);
-				Console.SetCursorPosition(20, 0);
+				Console.SetCursorPosition(20, 5);
 				Console.WriteLine(jeuBataille.CarteEnCourOrdi.Nom);
 
 			}
