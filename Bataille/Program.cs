@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BiblioCartes;
+using BiblioBataille;
 
 namespace Bataille
 {
@@ -11,46 +12,80 @@ namespace Bataille
     {
         private static void Main(string[] args)
         {
-            // on prevoit le nombre de lignes de sortie
-            Console.BufferHeight = 10000;
-            //on créer l'instance d'EnginDeCartes
-            EnginDeCartes engin = new EnginDeCartes();
 
-            // variale temporaire de list de list de cartes
-            List<List<Carte>> deuxPaquets = engin.RetourneDeuxPaquets();
+            Console.WriteLine("Pressez la touche N pour commencer une nouvelle partie");
+            if (Console.ReadKey().Key!=ConsoleKey.N)
+            {
+		            return;
+            }
+            Console.Clear();
+            Console.WriteLine("Nouvelle partie commencé, pressez une touche pour jouer");
 
-            // récupération de chaque paquet de cartes, pour le joueur et l'ordinateur
-            List<Carte> cartesJoueur = deuxPaquets[0];
-            List<Carte> cartesOrdi = deuxPaquets[1];	
+            JeuxBataille jeuBataille = new JeuxBataille();
+            jeuBataille.NouvellePartie();
 
-            // création de 2 colonnes Joueur et ordi 
-            int posHor = 0;
+            while (jeuBataille.EtatJeu != EtatsJeu.Termine)
+            {
+                Console.ReadKey();
+                jeuBataille.JouerUnTour();
+                Console.Clear();
+                Console.SetCursorPosition(0, 0);
+                Console.WriteLine("Joueur");
+                Console.SetCursorPosition(20, 0);
+                Console.WriteLine("Ordinateur");
+                Console.SetCursorPosition(0, 1);
+                Console.WriteLine(jeuBataille.CarteEnCourJoueur.Nom);
+                Console.SetCursorPosition(20, 0);
+                Console.WriteLine(jeuBataille.CarteEnCourOrdi.Nom);
+
+
+
+
+
+            }
+
+
+
+            //// on prevoit le nombre de lignes de sortie
+            //Console.BufferHeight = 2000;
+            ////on créer l'instance d'EnginDeCartes
+            //EnginDeCartes engin = new EnginDeCartes();
+
+            //// variale temporaire de list de list de cartes
+            //List<List<Carte>> deuxPaquets = engin.RetourneDeuxPaquets();
+
+            //// récupération de chaque paquet de cartes, pour le joueur et l'ordinateur
+            //List<Carte> cartesJoueur = deuxPaquets[0];
+            //List<Carte> cartesOrdi = deuxPaquets[1];	
+
+            //// création de 2 colonnes Joueur et ordi 
+            //int posHor = 0;
             
-            // tant que les joueurs ont des cartes on boucle
-            while (cartesJoueur.Count > 0 && cartesOrdi.Count > 0)
-            {
-                // les valeurs de posHor doivent être passées par référence, et non par valeur
-                // il faut mettre 'ref' devant tous les 'posHor', que ce soit l'appelant ou l'appelé
-                AfficheNomsJoueursEtCartes(ref posHor, cartesJoueur, cartesOrdi);								
-                // saut de ligne pour chaque colonne
-                posHor++;
+            //// tant que les joueurs ont des cartes on boucle
+            //while (cartesJoueur.Count > 0 && cartesOrdi.Count > 0)
+            //{
+            //    // les valeurs de posHor doivent être passées par référence, et non par valeur
+            //    // il faut mettre 'ref' devant tous les 'posHor', que ce soit l'appelant ou l'appelé
+            //    AfficheNomsJoueursEtCartes(ref posHor, cartesJoueur, cartesOrdi);								
+            //    // saut de ligne pour chaque colonne
+            //    posHor++;
 
-                AfficheGagnant(ref posHor, engin, cartesJoueur, cartesOrdi);
-                posHor++;
+            //    AfficheGagnant(ref posHor, engin, cartesJoueur, cartesOrdi);
+            //    posHor++;
 
-                Console.ReadLine();
-            }
+            //    Console.ReadLine();
+    //        }
 
-            // Affichage final du gagnant
-         if (cartesOrdi.Count == 0)
-            {
-                Console.WriteLine("Le Joueur a gagné !");
-            }
-            else
-    {
-        Console.WriteLine("L'Ordinateur a gagné !");
-    }
-            Console.ReadLine();      
+    //        // Affichage final du gagnant
+    //     if (cartesOrdi.Count == 0)
+    //        {
+    //            Console.WriteLine("Le Joueur a gagné !");
+    //        }
+    //        else
+    //{
+    //    Console.WriteLine("L'Ordinateur a gagné !");
+    //}
+    //        Console.ReadLine();      
   }
 
         private static void AfficheNomsJoueursEtCartes(ref int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi )

@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{863FD5AE-CD55-44CC-9D12-5CB3FAE9988D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{ACC31DA1-519A-4445-9EF9-123A10B9EEC9}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BiblioCartes</RootNamespace>
-    <AssemblyName>Bataille</AssemblyName>
+    <RootNamespace>BiblioBataille</RootNamespace>
+    <AssemblyName>BiblioBataille</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,17 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="JeuxBataille.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BiblioBataille\BiblioBataille.csproj">
-      <Project>{acc31da1-519a-4445-9ef9-123a10b9eec9}</Project>
-      <Name>BiblioBataille</Name>
-    </ProjectReference>
     <ProjectReference Include="..\JeuxDeCarte\BiblioCartes.csproj">
       <Project>{fe408835-b763-419a-bc86-c9683e53b264}</Project>
       <Name>BiblioCartes</Name>

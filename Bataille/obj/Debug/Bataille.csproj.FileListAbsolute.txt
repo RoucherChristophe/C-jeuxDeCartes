@@ -6,3 +6,5 @@ C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\Bataille\b
 C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\Bataille\obj\Debug\Bataille.csprojResolveAssemblyReference.cache
 C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\Bataille\obj\Debug\Bataille.exe
 C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\Bataille\obj\Debug\Bataille.pdb
+C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\Bataille\bin\Debug\BiblioBataille.dll
+C:\Users\christophe\documents\visual studio 2012\Projects\JeuxDeCarte\Bataille\bin\Debug\BiblioBataille.pdb
