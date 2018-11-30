@@ -11,7 +11,8 @@ namespace Bataille
     {
         private static void Main(string[] args)
         {
-            Console.BufferHeight = 1000;
+            // on prevoit le nombre de lignes de sortie
+            Console.BufferHeight = 10000;
             //on créer l'instance d'EnginDeCartes
             EnginDeCartes engin = new EnginDeCartes();
 
@@ -49,13 +50,12 @@ namespace Bataille
     {
         Console.WriteLine("L'Ordinateur a gagné !");
     }
-            Console.ReadLine();
-
-         
-        }
+            Console.ReadLine();      
+  }
 
         private static void AfficheNomsJoueursEtCartes(ref int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi )
         {
+            posHor++;
             // Affichage noms des joueurs 
             Console.SetCursorPosition(0, posHor);
             Console.WriteLine(string.Format("Joueur ({0})", cartesJoueur.Count));
@@ -106,17 +106,12 @@ namespace Bataille
         {
             //on récupère la valeur de la carte en bataille
             int valeurCarteBataille = cartesJoueur[0].Valeur; 
-            // on créer 2 nouveaux paquets pour la bataille
-            
+
+            // on créer 2 nouveaux paquets pour la bataille       
             List<Carte> cartesBatailleJoueur = new List<Carte>();
             List<Carte> cartesBatailleOrdi = new List<Carte>();
 
-            // insert permet de choisir ou on veut positionner la carte dans le paquet
-            // on met la carte au dessus du paquet de bataille pour pouvoir les confronter
-            cartesBatailleJoueur.Insert(0, cartesJoueur[0]);
-            cartesJoueur.RemoveAt(0); // on retire les cartes du paquet principale du joueur
-            cartesBatailleOrdi.Insert(0, cartesOrdi[0]);
-            cartesOrdi.RemoveAt(0); // on retire les cartes du paquet principale de l'ordi
+            DistribuerCartesBataille(cartesJoueur, cartesOrdi, cartesBatailleJoueur, cartesBatailleOrdi);
 
             posHor++;
             // on positionne le curseur
@@ -128,14 +123,11 @@ namespace Bataille
 
             while (true)
             {
-                cartesBatailleJoueur.Insert(0, cartesJoueur[0]);
-                cartesJoueur.RemoveAt(0); 
-                cartesBatailleOrdi.Insert(0, cartesOrdi[0]);
-                cartesOrdi.RemoveAt(0);
+                DistribuerCartesBataille(cartesJoueur, cartesOrdi, cartesBatailleJoueur, cartesBatailleOrdi);
 
                 AfficheNomsJoueursEtCartes(ref posHor, cartesBatailleJoueur, cartesBatailleOrdi);
 
-                posHor += 2;
+                posHor ++;
 
                 // le 1er joueur qui sort la même carte que la bataille gagne
                 if (cartesBatailleJoueur[0].Valeur == valeurCarteBataille)
@@ -148,10 +140,45 @@ namespace Bataille
                     GagneBataille(ref posHor, cartesJoueur, cartesOrdi, cartesBatailleJoueur, cartesBatailleOrdi, false);
                     break;
                 }
+
+                Console.SetCursorPosition(0, posHor);
+                Console.WriteLine("Cartes Joueur:{0} | Cartes Ordi:{1}", cartesJoueur.Count, cartesOrdi.Count);
+                posHor++;
                 Console.ReadLine();
             }
 
         }
+
+        private static void DistribuerCartesBataille(List<Carte> cartesJoueur, List<Carte> cartesOrdi,
+                                                     List<Carte> carteBatailleJoueur, List<Carte> cartesBatailleOrdi)
+        {
+            // si le joueur n'a plus de cartes pour faire une bataille l'ordi lui en donne
+            if (cartesJoueur.Count == 0)
+            {
+                carteBatailleJoueur.Insert(0, cartesOrdi[0]);
+                cartesOrdi.RemoveAt(0);
+                cartesBatailleOrdi.Insert(0, cartesOrdi[0]);
+                cartesOrdi.RemoveAt(0);
+            }
+            else if (cartesOrdi.Count == 0)
+            {
+                carteBatailleJoueur.Insert(0, cartesJoueur[0]);
+                cartesJoueur.RemoveAt(0);
+                cartesBatailleOrdi.Insert(0, cartesJoueur[0]);
+                cartesJoueur.RemoveAt(0);
+            }
+            else
+            {
+                // insert permet de choisir ou on veut positionner la carte dans le paquet
+                // on met la carte au dessus du paquet de bataille pour pouvoir les confronter
+                carteBatailleJoueur.Insert(0, cartesJoueur[0]);
+                cartesJoueur.RemoveAt(0); // on retire les cartes du paquet principale du joueur
+                cartesBatailleOrdi.Insert(0, cartesOrdi[0]);
+                cartesOrdi.RemoveAt(0); // on retire les cartes du paquet principale de l'ordi
+            }
+        }
+
+
 
         private static void GagneBataille(ref int posHor, List<Carte> cartesJoueur, List<Carte> cartesOrdi,
                                           List<Carte> carteBatailleJoueur, List<Carte> carteBatailleOrdi, bool joueurGagnant)
@@ -160,34 +187,19 @@ namespace Bataille
             if (joueurGagnant)
             {
                 Console.WriteLine("Le joueur a gagné la bataille");
-                // on prend toutes les cartes du paquet bataille du joueur pour lui redonner 
-                while (carteBatailleJoueur.Count > 0)
-                {
-                    cartesJoueur.Add(carteBatailleJoueur[0]);
-                    carteBatailleJoueur.RemoveAt(0);
-                }
+                // on prend toutes les cartes du paquet bataille du joueur pour lui redonner
+                // 'AddRange' permet d'ajouter des collections
+                cartesJoueur.AddRange(carteBatailleJoueur);              
                 // on prend toutes les cartes du paquet bataille de l'ordi pour le donner au joueur
-                while (carteBatailleOrdi.Count > 0)
-                {
-                    cartesJoueur.Add(carteBatailleOrdi[0]);
-                    carteBatailleOrdi.RemoveAt(0);
-                }
+                cartesJoueur.AddRange(carteBatailleOrdi);
             }
             else
             {
                 Console.WriteLine("L'Ordi a gagné la bataille");
                 // on prend toutes les cartes du paquet bataille de l'ordi pour lui redonner 
-                while (carteBatailleJoueur.Count > 0)
-                {                 
-                    cartesOrdi.Add(carteBatailleJoueur[0]);
-                    carteBatailleJoueur.RemoveAt(0);
-                }
+                cartesOrdi.AddRange(carteBatailleJoueur);
                 // on prend toutes les cartes du paquet bataille du joueur pour le donner a l'ordi
-                while (carteBatailleOrdi.Count > 0)
-                {
-                    cartesOrdi.Add(carteBatailleOrdi[0]);
-                    carteBatailleOrdi.RemoveAt(0);
-                }
+                cartesOrdi.AddRange(carteBatailleOrdi);
             }
         }
 
