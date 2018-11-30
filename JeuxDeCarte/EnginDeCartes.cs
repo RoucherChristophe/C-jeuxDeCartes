@@ -87,6 +87,21 @@ namespace BiblioCartes
             return CartesBrassees;
         }
 
+        public void DeplacerCarteDessusDessous(List<Carte> paquet1, List<Carte> paquet2)
+        {
+            paquet2.Add(paquet1[0]); // on récupère la carte du paquet1 et on la place en dessous du paquet2
+            paquet1.RemoveAt(0); // la carte du paquet1 est suprimmé 
+
+        }
+
+        public void DeplacerCarteDessusDessus(List<Carte> paquet1, List<Carte> paquet2)
+        {
+            // insert permet de choisir ou on veut positionner la carte dans le paquet
+            // on met la carte au dessus du paquet de bataille pour pouvoir les confronter
+            paquet2.Insert(0, paquet1[0]); // on retire la 1ere carte du paquet1 pour la mettre au dessus du paquet2
+            paquet1.RemoveAt(0); // on retire la carte du paquet1 
+        }
+
 
     }
 }
