@@ -17,6 +17,12 @@ namespace BiblioBataille
 
     }
 
+    public enum TypeJoueur
+    {
+        Joueur,
+        Ordi
+    }
+
 
     public class JeuxBataille
     {
@@ -27,6 +33,7 @@ namespace BiblioBataille
         private EtatsJeu _etatJeu;
         private Carte _carteEnCoursJoueur;
         private Carte _carteEnCoursOrdi;
+        private TypeJoueurs _gagnantDernierTour;
 
         // constructeur
         public JeuxBataille()
@@ -72,10 +79,14 @@ namespace BiblioBataille
 
             if (_etatJeu ==EtatsJeu.Normal)
             {
-                _carteEnCoursJoueur = _cartesJoueur[0];
-                _cartesJoueur.RemoveAt(0);
-                _carteEnCoursOrdi = _cartesOrdi[0];
-                _cartesOrdi.RemoveAt(0);
+                _engin.JouerCarte(_cartesJoueur, ref _carteEnCoursJoueur);
+                _engin.JouerCarte(_cartesOrdi, ref _carteEnCoursOrdi);
+
+                    if (_carteEnCoursJoueur.Valeur >= _carteEnCoursOrdi.Valeur)
+	                {
+		                _engin.PlacerCarteSousPaquet(ref _carteEnCoursOrdi, _cartesJoueur);
+                        _engin.PlacerCarteSousPaquet(ref _carteEnCoursJoueur, _cartesJoueur);
+	                }
             }
 
 

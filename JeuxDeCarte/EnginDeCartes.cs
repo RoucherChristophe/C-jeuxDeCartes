@@ -102,6 +102,19 @@ namespace BiblioCartes
             paquet1.RemoveAt(0); // on retire la carte du paquet1 
         }
 
+        public void JouerCarte(List<Carte> paquet, ref Carte carte)
+        {
+            carte = paquet[0];
+            paquet.RemoveAt(0);
+        }
+
+        public void PlacerCarteSousPaquet(ref Carte carte, List<Carte> paquet)
+        {
+            paquet.Add(carte);
+        }
+
+
+
 
     }
 }
