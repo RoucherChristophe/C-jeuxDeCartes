@@ -35,19 +35,28 @@ namespace Bataille
 				Console.WriteLine("Gagnant dernier tour: {0}", jeuBataille.GagnantDernierTour.ToString());
                 Console.SetCursorPosition(0, 2);
                 Console.WriteLine("Nombre cartes joueur: {0}", jeuBataille.NombreCartesJoueur);
-                Console.SetCursorPosition(30, 2);
+                Console.SetCursorPosition(40, 2);
                 Console.WriteLine("Nombre cartes ordinateur: {0}", jeuBataille.NombreCartesOrdi);
-				Console.SetCursorPosition(0, 4);
+                Console.SetCursorPosition(0, 3);
+                Console.WriteLine("Nombre cartes bataille joueur: {0}", jeuBataille.NombreCartesBatailleJoueur);
+                Console.SetCursorPosition(40, 3);
+                Console.WriteLine("Nombre cartes bataille ordinateur: {0}", jeuBataille.NombreCartesBatailleOrdi);
+                Console.SetCursorPosition(0, 4);
+                Console.WriteLine("Valeur carte bataille: {0}", jeuBataille.ValeurCarteBataille);
+
+				Console.SetCursorPosition(0, 6);
 				Console.WriteLine("Joueur");
-				Console.SetCursorPosition(20, 4);
+				Console.SetCursorPosition(20, 6);
 				Console.WriteLine("Ordinateur");
-				Console.SetCursorPosition(0, 5);
+				Console.SetCursorPosition(0, 7);
 				Console.WriteLine(jeuBataille.CarteEnCourJoueur.Nom);
-				Console.SetCursorPosition(20, 5);
+				Console.SetCursorPosition(20, 7);
 				Console.WriteLine(jeuBataille.CarteEnCourOrdi.Nom);
 
 			}
-
+            Console.SetCursorPosition(0, 9);
+            Console.WriteLine("La partie est terminée!!!");
+            Console.Read();
 
 
 			//// on prevoit le nombre de lignes de sortie
