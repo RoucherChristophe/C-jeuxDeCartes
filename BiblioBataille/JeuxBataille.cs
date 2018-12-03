@@ -37,6 +37,7 @@ namespace BiblioBataille
         private Carte _carteEnCoursOrdi;
         private TypesJoueur _gagnantDernierTour;
         private int _valeurCarteBataille = 0;
+        private TypesJoueur _dernierAvecDesCartes;
 
         // constructeur
         public JeuxBataille()
@@ -113,13 +114,22 @@ namespace BiblioBataille
                 return;
             }
             
-            if (_cartesJoueur.Count == 0 || _cartesOrdi.Count == 0)
-            {
-                _etatJeu = EtatsJeu.Termine;
-            }
-
             if (_etatJeu ==EtatsJeu.Normal)
-            {               
+            {
+
+                if (_cartesJoueur.Count == 0)
+                {
+                    _etatJeu = EtatsJeu.Termine;
+                    _gagnantDernierTour = TypesJoueur.Ordi;
+                    return; // pour sortir de la méthode 'JouerUnTour()'
+                }
+                if (_cartesOrdi.Count == 0)
+                {
+                    _etatJeu = EtatsJeu.Termine;
+                    _gagnantDernierTour = TypesJoueur.Joueur;
+                    return; // pour sortir de la méthode 'JouerUnTour()'
+                }
+
                 _engin.JouerCarte(_cartesJoueur, ref _carteEnCoursJoueur);
                 _engin.JouerCarte(_cartesOrdi, ref _carteEnCoursOrdi);
 
@@ -141,9 +151,25 @@ namespace BiblioBataille
                     _gagnantDernierTour = TypesJoueur.Ordi;
                 }
             }
+
             else if (_etatJeu == EtatsJeu.Bataille)
             {
-                if (_cartesJoueur.Count > 0 && _cartesOrdi.Count > 0)
+
+                if (_cartesJoueur.Count == 0 && _cartesOrdi.Count == 0)
+                {
+                    if (_dernierAvecDesCartes == TypesJoueur.Joueur)
+                    {
+                        _engin.DeplacerPaquetDessous(_cartesBatailleJoueur, _cartesJoueur);
+                        _engin.DeplacerPaquetDessous(_cartesBatailleOrdi, _cartesJoueur);
+                    }
+                    else
+                    {
+                        _engin.DeplacerPaquetDessous(_cartesBatailleJoueur, _cartesOrdi);
+                        _engin.DeplacerPaquetDessous(_cartesBatailleOrdi, _cartesOrdi);    
+                    }
+                }
+
+                else if (_cartesJoueur.Count > 0 && _cartesOrdi.Count > 0)
                 {
                     _engin.DeplacerCarteDessusDessus(_cartesJoueur, _cartesBatailleJoueur);
                     _engin.DeplacerCarteDessusDessus(_cartesOrdi, _cartesBatailleOrdi);
@@ -153,6 +179,7 @@ namespace BiblioBataille
                 {
                     _engin.DeplacerCarteDessusDessus(_cartesOrdi, _cartesBatailleJoueur);
                     _engin.DeplacerCarteDessusDessus(_cartesOrdi, _cartesBatailleOrdi);
+                    _dernierAvecDesCartes = TypesJoueur.Ordi;
                 }
                 else 
                    
@@ -160,6 +187,7 @@ namespace BiblioBataille
                 {
                     _engin.DeplacerCarteDessusDessus(_cartesJoueur, _cartesBatailleOrdi);
                     _engin.DeplacerCarteDessusDessus(_cartesJoueur, _cartesBatailleJoueur);
+                    _dernierAvecDesCartes = TypesJoueur.Joueur;
                 }
 
                 _carteEnCoursJoueur = _cartesBatailleJoueur[0];
@@ -169,6 +197,8 @@ namespace BiblioBataille
                 {
                     _engin.DeplacerPaquetDessous(_cartesBatailleJoueur, _cartesJoueur);
                     _engin.DeplacerPaquetDessous(_cartesBatailleOrdi, _cartesJoueur);
+                    _engin.PlacerCarteSousPaquet(ref _carteEnCoursJoueur, _cartesJoueur);
+                    _engin.PlacerCarteSousPaquet(ref _carteEnCoursOrdi, _cartesJoueur);
                     _etatJeu = EtatsJeu.Normal;
                     _valeurCarteBataille = 0;
                 }
@@ -176,6 +206,8 @@ namespace BiblioBataille
                 {
                     _engin.DeplacerPaquetDessous(_cartesBatailleJoueur, _cartesOrdi);
                     _engin.DeplacerPaquetDessous(_cartesBatailleOrdi, _cartesOrdi);
+                    _engin.PlacerCarteSousPaquet(ref _carteEnCoursJoueur, _cartesOrdi);
+                    _engin.PlacerCarteSousPaquet(ref _carteEnCoursOrdi, _cartesOrdi);
                     _etatJeu = EtatsJeu.Normal;
                     _valeurCarteBataille = 0;
                 }
